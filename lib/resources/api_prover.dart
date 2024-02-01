@@ -15,7 +15,7 @@ class Api {
 
   Future<List<LeaveModel>> fetchLeavesfromAPI() async {
     try {
-      final url = await Uri.parse("http://192.168.100.6:8000/api/leave");
+      final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
       // final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
       print("-------------------------------------parsed--------------------");
       var response = await http.get(

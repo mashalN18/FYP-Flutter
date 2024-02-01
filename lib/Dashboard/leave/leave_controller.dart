@@ -6,7 +6,7 @@ import 'package:login_page/resources/api_prover.dart';
 class LeaveController extends GetxController {
 
   static String endPoint = "leave/";
-  static String authToken = "3|upUsLbwdPct1z8wWRjDZhMkm6sP4vmw7UPMnOhkK";
+  static String authToken = "4|X11L8g9cZ4JLWuikxl9FgetrrZL8Oetuc36DIe8l";
 
   Api api = Api(apiKey: endPoint, authToken);
   RxBool isLoading = true.obs;

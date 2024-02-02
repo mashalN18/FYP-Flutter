@@ -3,7 +3,7 @@ class AppConstants {
 
   //Base url
 
-  static const String BASE_URL = "http://192.168.0.67:8000/api";
+  static const String BASE_URL = "http://192.168.100.1:8000/api";
 
   static const String LOGIN_URL = "/loginRest";
   static const String GET_TASKS = "/task";

@@ -15,7 +15,7 @@ import 'package:dio/dio.dart' as dio;
 class LoginController extends GetxController {
   bool isLoading = false;
 
-  Future<bool> login(
+  Future<void> login(
       {required BuildContext context,
       required String email,
       required String password}) async {
@@ -35,46 +35,9 @@ class LoginController extends GetxController {
     } else {
       isLoading = true;
       update();
-      dio.Response response =
-          await ApiClient.login(email: email, password: password);
-      logs("$response");
+          await ApiClient.login(email: email, password: password, context: context);
       isLoading = false;
       update();
-      if (response.statusCode == AppConstants.SUCCESS) {
-        String responseJson = json.encode(response.data);
-        final loginSuccessResponse = loginSuccessResponseFromJson(responseJson);
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => DashboardScreen(),
-          ),
-        );
-        GeneralHelper.snackBar(
-            title: "Congratulations", message: "Login Successfully");
-
-        return true;
-      } else if (response.statusCode! >= AppConstants.SERVER_SIDE_ERROR) {
-        String responseJson = json.encode(response.data);
-
-        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
-        GeneralHelper.snackBar(
-            title: "Error", message: loginErrorResponse.message, isError: true);
-        return false;
-      } else if (response.statusCode! == AppConstants.UNAUTHORIZED) {
-        String responseJson = json.encode(response.data);
-
-        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
-        GeneralHelper.snackBar(
-            title: "Error", message: loginErrorResponse.message, isError: true);
-        return false;
-      } else if (response.statusCode! == AppConstants.INTERNAL_SERVER_ERROR) {
-        String responseJson = json.encode(response.data);
-
-        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
-        GeneralHelper.snackBar(
-            title: "Error", message: loginErrorResponse.message, isError: true);
-        return false;
-      }
-    }
-    return false;
+  }
   }
 }

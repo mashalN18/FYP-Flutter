@@ -18,54 +18,54 @@ class TaskScreenController extends GetxController{
   int totalPage = 0;
   List<TaskSuccessResponse> taskList = [];
 
-  Future<bool> getTasks() async {
-    isLoading = true;
-    update();
-    dio.Response response =
-    await ApiClient.getTasks();
-
-    isLoading = false;
-    update();
-    if (response.statusCode == HttpStatusCodes.OK) {
-      String responseJson = json.encode(response.data);
-          final taskSuccessResponse = taskSuccessResponseFromJson(responseJson);
-      // taskList.add(taskSuccessResponse);
-      GeneralHelper.snackBar(
-          title: "Congratulations", message: "Login Successfully");
-
-      update();
-
-      return true;
-    } else if (response.statusCode! >= HttpStatusCodes.BAD_REQUEST) {
-      String responseJson = json.encode(response.data);
-
-    final taskErrorResponse = taskErrorResponseFromJson(responseJson);
-      GeneralHelper.snackBar(
-          title: "Error",
-          message: taskErrorResponse.message,
-          isError: true);
-      return false;
-    } else if (response.statusCode! == HttpStatusCodes.UNAUTHORIZED) {
-      String responseJson = json.encode(response.data);
-
-      final taskErrorResponse = taskErrorResponseFromJson(responseJson);
-      GeneralHelper.snackBar(
-          title: "Error",
-          message: taskErrorResponse.message,
-          isError: true);
-      return false;
-    } else if (response.statusCode! == HttpStatusCodes.INTERNAL_SERVER_ERROR) {
-      String responseJson = json.encode(response.data);
-
-      final taskErrorResponse = taskErrorResponseFromJson(responseJson);
-      GeneralHelper.snackBar(
-          title: "Error",
-          message: taskErrorResponse.message,
-          isError: true);
-      return false;
-    }
-    return false;
-  }
+  // Future<bool> getTasks() async {
+  //   isLoading = true;
+  //   update();
+  //   dio.Response response =
+  //   await ApiClient.getTasks();
+  //
+  //   isLoading = false;
+  //   update();
+  //   if (response.statusCode == HttpStatusCodes.OK) {
+  //     String responseJson = json.encode(response.data);
+  //         final taskSuccessResponse = taskSuccessResponseFromJson(responseJson);
+  //     // taskList.add(taskSuccessResponse);
+  //     GeneralHelper.snackBar(
+  //         title: "Congratulations", message: "Login Successfully");
+  //
+  //     update();
+  //
+  //     return true;
+  //   } else if (response.statusCode! >= HttpStatusCodes.BAD_REQUEST) {
+  //     String responseJson = json.encode(response.data);
+  //
+  //   final taskErrorResponse = taskErrorResponseFromJson(responseJson);
+  //     GeneralHelper.snackBar(
+  //         title: "Error",
+  //         message: taskErrorResponse.message,
+  //         isError: true);
+  //     return false;
+  //   } else if (response.statusCode! == HttpStatusCodes.UNAUTHORIZED) {
+  //     String responseJson = json.encode(response.data);
+  //
+  //     final taskErrorResponse = taskErrorResponseFromJson(responseJson);
+  //     GeneralHelper.snackBar(
+  //         title: "Error",
+  //         message: taskErrorResponse.message,
+  //         isError: true);
+  //     return false;
+  //   } else if (response.statusCode! == HttpStatusCodes.INTERNAL_SERVER_ERROR) {
+  //     String responseJson = json.encode(response.data);
+  //
+  //     final taskErrorResponse = taskErrorResponseFromJson(responseJson);
+  //     GeneralHelper.snackBar(
+  //         title: "Error",
+  //         message: taskErrorResponse.message,
+  //         isError: true);
+  //     return false;
+  //   }
+  //   return false;
+  // }
 
 
 }

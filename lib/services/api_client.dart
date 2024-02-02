@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:http_parser/http_parser.dart';
+import 'package:login_page/Dashboard/MainScreen/dashboard.dart';
 import 'package:login_page/services/api_method.dart';
 import 'package:login_page/utils/app_constants.dart';
 import 'package:login_page/utils/logs.dart';
+import 'package:http/http.dart' as http;
 
 
 class ApiClient {
@@ -74,37 +74,40 @@ class ApiClient {
 
   static const baseUrl = "http://127.0.0.1:8000/api/";
 
-  static Future<dio.Response> login({
+
+  static Future<void> login({
+    required BuildContext context,
     required String email,
     required String password,
   }) async {
-    var url = AppConstants.BASE_URL + AppConstants.LOGIN_URL;
-    dio.Response response;
-    response = await ApiMethods.postRequest(
-        {
-          'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
-          "Content-Type": "application/json"},
-        data: {"email": email, "password": password}, url: url);
-
     try {
-      logs(response.statusMessage.toString());
-      if (response.statusCode! == 200) {
-        return response;
-      } else {
-        return response;
+      final url = await Uri.parse("http://127.0.0.1:8000/api/loginRest");
+      // final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
+      print("-------------------------------------parsed--------------------");
+      var response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
+          'Accept': 'application/json',
+        },
+      );
+      print(
+          "-----------------------------------------response.body-----------------");
+      if (response.statusCode == 200) {
+        print("response is 200");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(),
+          ),
+        );      } else {
+        throw Exception('Failed to load leaves');
       }
-    } on dio.DioError catch (e) {
-      if (e.message == "Receiving data timeout[50000ms]") {
-        return response;
-      }
-      if (e.message == "Http status error [401]") {
-        return response;
-      } else if (e.message == "Http status error [500]") {
-        return response;
-      }
-      return response;
+    } catch (error) {
+      print(error);
+      throw Exception('Error fetching leaves: $error');
     }
   }
+
 
 
 
@@ -142,41 +145,41 @@ class ApiClient {
   //   }
   // }
   //
-  static Future<dio.Response> getTasks() async {
-    var url = AppConstants.BASE_URL + AppConstants.GET_TASKS;
-    dio.Response response;
-    response = await ApiMethods.getMethod(headers: {
-      // "Authorization": "Bearer ${Preferences.getAuthId()}",
-      "Content-Type": "application/json",
-    }, url: url);
-    try {
-      String responseJson = json.encode(response.data);
-      logs(response.statusCode.toString());
-      if (response.statusCode! == 200) {
-        return response;
-      }else {
-        return response;
-
-      }
-    } on dio.DioError catch (e) {
-      if (e.message == "Receiving data timeout[50000ms]") {
-        // return ("Please check your connection");
-        return response;
-
-      }
-      if (e.message == "Http status error [401]") {
-        // return ("401");
-        return response;
-
-      } else if (e.message == "Http status error [500]") {
-        return response;
-
-        // return ("500");
-      }
-      // return (e.message!);
-      return response;
-
-    }
-  }
+  // static Future<dio.Response> getTasks() async {
+  //   var url = AppConstants.BASE_URL + AppConstants.GET_TASKS;
+  //   dio.Response response;
+  //   response = await ApiMethods.getMethod(headers: {
+  //     // "Authorization": "Bearer ${Preferences.getAuthId()}",
+  //     "Content-Type": "application/json",
+  //   }, url: url);
+  //   try {
+  //     String responseJson = json.encode(response.data);
+  //     logs(response.statusCode.toString());
+  //     if (response.statusCode! == 200) {
+  //       return response;
+  //     }else {
+  //       return response;
+  //
+  //     }
+  //   } on dio.DioError catch (e) {
+  //     if (e.message == "Receiving data timeout[50000ms]") {
+  //       // return ("Please check your connection");
+  //       return response;
+  //
+  //     }
+  //     if (e.message == "Http status error [401]") {
+  //       // return ("401");
+  //       return response;
+  //
+  //     } else if (e.message == "Http status error [500]") {
+  //       return response;
+  //
+  //       // return ("500");
+  //     }
+  //     // return (e.message!);
+  //     return response;
+  //
+  //   }
+  // }
 
 }

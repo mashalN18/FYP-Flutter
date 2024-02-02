@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:login_page/services/api_client.dart';
 import 'package:login_page/utils/general_helper.dart';
 import 'package:login_page/utils/logs.dart';
 import 'package:login_page/utils/status_codes.dart';
+
+import '../model/task_response/task_success_response.dart';
 
 
 class TaskScreenController extends GetxController{
@@ -17,12 +20,14 @@ class TaskScreenController extends GetxController{
   //   isLoading = true;
   //   update();
   //   dio.Response response =
-  //   // await ApiClient.getNotifications(page: currentPage, limit: totalPage);
+  //   await ApiClient.getTasks();
   //
   //   isLoading = false;
   //   update();
   //   if (response.statusCode == HttpStatusCodes.OK) {
   //     String responseJson = json.encode(response.data);
+  //         final taskSuccessResponse = taskSuccessResponseFromJson(responseJson);
+  //
   //     // GeneralHelper.snackBar(
   //     //     title: "Congratulations", message: "Login Successfully");
   //

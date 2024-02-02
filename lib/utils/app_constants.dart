@@ -6,6 +6,7 @@ class AppConstants {
   static const String BASE_URL = "http://localhost:8000/api";
 
   static const String LOGIN_URL = "/login";
+  static const String GET_TASKS = "/task";
   // static const String LOGIN_URL = "/vendor/login";
   // static const String HOME_GET = "/getAllVendorsByLatLong";
   // static const String VERIFY_OTP = "/verifyOtp/Vendor";

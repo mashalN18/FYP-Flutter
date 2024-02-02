@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:login_page/controller/login_controller.dart';
 import 'package:login_page/services/api_client.dart';
 import 'Dashboard.dart';
 import 'Dashboard/MainScreen/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage
+
+  ({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -102,20 +106,23 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 10), // Add space
-                ElevatedButton(
-                  onPressed: () {
-                    ApiClient.login(email: _emailTextController.text.trim(), password: _passwordTextController.text.trim());
-
-                  },
-                  child: Text('Login'),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                GetBuilder<LoginController>(
+                  init: LoginController(),
+                    builder: (loginObj) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      loginObj.login(context: context, email: _emailTextController.text.trim(), password: _emailTextController.text.trim());
+                    },
+                    child: Text('Login'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      primary: Color.fromRGBO(78, 169, 132, 1.0),
+                      onPrimary: Colors.black87,
                     ),
-                    primary: Color.fromRGBO(78, 169, 132, 1.0),
-                    onPrimary: Colors.black87,
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),

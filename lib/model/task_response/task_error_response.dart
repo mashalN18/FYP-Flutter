@@ -1,89 +1,25 @@
 // To parse this JSON data, do
 //
-//     final taskSuccessResponse = taskSuccessResponseFromJson(jsonString);
+//     final taskErrorResponse = taskErrorResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-List<TaskSuccessResponse> taskSuccessResponseFromJson(String str) => List<TaskSuccessResponse>.from(json.decode(str).map((x) => TaskSuccessResponse.fromJson(x)));
+TaskErrorResponse taskErrorResponseFromJson(String str) => TaskErrorResponse.fromJson(json.decode(str));
 
-String taskSuccessResponseToJson(List<TaskSuccessResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String taskErrorResponseToJson(TaskErrorResponse data) => json.encode(data.toJson());
 
-class TaskSuccessResponse {
-  String name;
-  String description;
-  DateTime startDate;
-  DateTime endDate;
-  Type? type;
-  TaskStatus taskStatus;
-  int id;
-  String? taskImage;
+class TaskErrorResponse {
+  String message;
 
-  TaskSuccessResponse({
-    required this.name,
-    required this.description,
-    required this.startDate,
-    required this.endDate,
-    required this.type,
-    required this.taskStatus,
-    required this.id,
-    required this.taskImage,
+  TaskErrorResponse({
+    required this.message,
   });
 
-  factory TaskSuccessResponse.fromJson(Map<String, dynamic> json) => TaskSuccessResponse(
-    name: json["name"],
-    description: json["description"],
-    startDate: DateTime.parse(json["start_date"]),
-    endDate: DateTime.parse(json["end_date"]),
-    type: typeValues.map[json["type"]]!,
-    taskStatus: taskStatusValues.map[json["task_status"]]!,
-    id: json["id"],
-    taskImage: json["task_image"],
+  factory TaskErrorResponse.fromJson(Map<String, dynamic> json) => TaskErrorResponse(
+    message: json["message"],
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "description": description,
-    "start_date": "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
-    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
-    "type": typeValues.reverse[type],
-    "task_status": taskStatusValues.reverse[taskStatus],
-    "id": id,
-    "task_image": taskImage,
+    "message": message,
   };
-}
-
-enum TaskStatus {
-  COMPLETED,
-  OPEN,
-  SUBMITED
-}
-
-final taskStatusValues = EnumValues({
-  "Completed": TaskStatus.COMPLETED,
-  "Open": TaskStatus.OPEN,
-  "Submited": TaskStatus.SUBMITED
-});
-
-enum Type {
-  NEW,
-  RECURSIVE,
-  TYPE_NEW
-}
-
-final typeValues = EnumValues({
-  "new": Type.NEW,
-  "Recursive": Type.RECURSIVE,
-  "New": Type.TYPE_NEW
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

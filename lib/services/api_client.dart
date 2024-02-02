@@ -12,12 +12,6 @@ import 'package:login_page/utils/logs.dart';
 
 
 class ApiClient {
-  ApiClient._internal();
-  static final ApiClient _singleton = ApiClient._internal();
-
-  factory ApiClient() {
-    return _singleton;
-  }
   //
   // static Future<dio.Response> registration(
   //     {

@@ -79,7 +79,9 @@ class ApiClient {
     var url = AppConstants.BASE_URL + AppConstants.LOGIN_URL;
     dio.Response response;
     response = await ApiMethods.postRequest(
-        {"Content-Type": "application/json"},
+        {
+          "Authorization": "Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0",
+          "Content-Type": "application/json"},
         data: {"email": email, "password": password}, url: url);
 
     try {

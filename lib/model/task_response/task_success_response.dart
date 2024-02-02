@@ -14,7 +14,7 @@ class TaskSuccessResponse {
   DateTime startDate;
   DateTime endDate;
   Type? type;
-  TaskStatus taskStatus;
+  String taskStatus;
   int id;
   String? taskImage;
 
@@ -34,8 +34,8 @@ class TaskSuccessResponse {
     description: json["description"],
     startDate: DateTime.parse(json["start_date"]),
     endDate: DateTime.parse(json["end_date"]),
-    type: typeValues.map[json["type"]]!,
-    taskStatus: taskStatusValues.map[json["task_status"]]!,
+    type: json["type"],
+    taskStatus: json["task_status"],
     id: json["id"],
     taskImage: json["task_image"],
   );
@@ -45,45 +45,10 @@ class TaskSuccessResponse {
     "description": description,
     "start_date": "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
     "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
-    "type": typeValues.reverse[type],
-    "task_status": taskStatusValues.reverse[taskStatus],
+    "type": type,
+    "task_status": taskStatus,
     "id": id,
     "task_image": taskImage,
   };
 }
 
-enum TaskStatus {
-  COMPLETED,
-  OPEN,
-  SUBMITED
-}
-
-final taskStatusValues = EnumValues({
-  "Completed": TaskStatus.COMPLETED,
-  "Open": TaskStatus.OPEN,
-  "Submited": TaskStatus.SUBMITED
-});
-
-enum Type {
-  NEW,
-  RECURSIVE,
-  TYPE_NEW
-}
-
-final typeValues = EnumValues({
-  "new": Type.NEW,
-  "Recursive": Type.RECURSIVE,
-  "New": Type.TYPE_NEW
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
-}

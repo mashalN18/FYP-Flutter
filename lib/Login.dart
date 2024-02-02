@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/services/api_client.dart';
 import 'Dashboard.dart';
 import 'Dashboard/MainScreen/dashboard.dart';
 
@@ -10,8 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // final _emailController = TextEditingController();
-  // final _passwordController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+
   bool _isPasswordVisible = false; // Track password visibility state
 
   @override
@@ -57,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextField(
-                  //controller: _emailController,
+                  controller: _emailTextController,
                   decoration: InputDecoration(
                     hintText: 'E-mail',
                     hintStyle: TextStyle(color: Colors.black87),
@@ -72,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10), // Adjusted margin
                   child: TextField(
-                    //controller: _passwordController,
+                    controller: _passwordTextController,
                     decoration: InputDecoration(
                       hintText: 'Password',
                       hintStyle: TextStyle(color: Colors.black87),
@@ -102,11 +104,8 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 10), // Add space
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DashboardScreen(),
-                      ),
-                    );
+                    ApiClient.login(email: _emailTextController.text.trim(), password: _passwordTextController.text.trim());
+
                   },
                   child: Text('Login'),
                   style: ElevatedButton.styleFrom(

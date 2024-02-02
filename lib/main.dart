@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:login_page/Splash_Screen.dart';
 
 import 'Dashboard.dart';
@@ -8,27 +9,27 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-
-  Widget build(BuildContext context) {
-    return MaterialApp(
-
-      debugShowCheckedModeBanner: false,
-      home: splashscreen(),
-
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
-class LoginApp extends StatelessWidget {
+
+class _MyAppState extends State<MyApp> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // Preferences();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login Page Example',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      // home: Dashboard(), // Use the LoginPage as the home widget
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+
     );
   }
 }

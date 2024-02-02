@@ -72,6 +72,8 @@ class ApiClient {
   //   }
   // }
 
+  static const baseUrl = "http://127.0.0.1:8000/api/";
+
   static Future<dio.Response> login({
     required String email,
     required String password,
@@ -80,7 +82,7 @@ class ApiClient {
     dio.Response response;
     response = await ApiMethods.postRequest(
         {
-          "Authorization": "Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0",
+          'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
           "Content-Type": "application/json"},
         data: {"email": email, "password": password}, url: url);
 

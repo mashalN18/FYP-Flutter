@@ -8,6 +8,7 @@ import 'package:login_page/model/login_response/login_success_response.dart';
 import 'package:login_page/services/api_client.dart';
 import 'package:login_page/utils/app_constants.dart';
 import 'package:login_page/utils/general_helper.dart';
+import 'package:login_page/utils/logs.dart';
 import 'package:login_page/utils/utils.dart';
 import 'package:dio/dio.dart' as dio;
 
@@ -36,6 +37,7 @@ class LoginController extends GetxController {
       update();
       dio.Response response =
           await ApiClient.login(email: email, password: password);
+      logs("$response");
       isLoading = false;
       update();
       if (response.statusCode == AppConstants.SUCCESS) {

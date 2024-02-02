@@ -17,8 +17,8 @@ class ApiMethods {
           onSendProgress: (int sent, int total) {},
           options: dio.Options(
             followRedirects: true,
-            sendTimeout: const Duration(milliseconds: 100000),
-            receiveTimeout: const Duration(milliseconds: 100000),
+            sendTimeout: const Duration(seconds: 60),
+            receiveTimeout: const Duration(seconds: 60),
             validateStatus: (status) => true,
             headers: headers,
           ));

@@ -100,7 +100,7 @@ class ApiClient {
           ),
         );
       } else {
-        throw Exception('Failed to load leaves');
+        throw Exception('Failed to load aqal in mashal mind');
       }
     } catch (error) {
       print(error);

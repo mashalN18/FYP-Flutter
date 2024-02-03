@@ -79,11 +79,11 @@ class ApiClient {
     required String password,
   }) async {
     try {
-      final url = await Uri.parse("http://127.0.0.1:8000/api/loginRest");
+      final url = await Uri.parse("https://jsonplaceholder.typicode.com/posts/1");
       // final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
       print("-------------------------------------parsed--------------------");
       var response = await http.post(url, headers: {
-        // 'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
+        'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
         'Accept': 'application/json',
       }, body: {
         "email": email,

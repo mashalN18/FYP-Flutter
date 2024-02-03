@@ -91,6 +91,7 @@ class ApiClient {
       });
       print(
           "-----------------------------------------response.body-----------------");
+      print("response.statusCode ${response.statusCode}");
       if (response.statusCode == 200) {
         print("response is 200");
         Navigator.of(context).pushReplacement(

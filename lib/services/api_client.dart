@@ -79,7 +79,7 @@ class ApiClient {
     required String password,
   }) async {
     try {
-      final url = await Uri.parse("https://jsonplaceholder.typicode.com/posts/1");
+      final url = await Uri.parse("http://localhost:8000/api/loginRest");
       // final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
       print("-------------------------------------parsed--------------------");
       var response = await http.post(url, headers: {
@@ -100,7 +100,7 @@ class ApiClient {
           ),
         );
       } else {
-        throw Exception('Failed to load aqal in mashal mind');
+        throw Exception('Failed to load leaves');
       }
     } catch (error) {
       print(error);

@@ -10,7 +10,6 @@ import 'package:login_page/utils/app_constants.dart';
 import 'package:login_page/utils/logs.dart';
 import 'package:http/http.dart' as http;
 
-
 class ApiClient {
   //
   // static Future<dio.Response> registration(
@@ -74,7 +73,6 @@ class ApiClient {
 
   static const baseUrl = "http://127.0.0.1:8000/api/";
 
-
   static Future<void> login({
     required BuildContext context,
     required String email,
@@ -84,13 +82,13 @@ class ApiClient {
       final url = await Uri.parse("http://127.0.0.1:8000/api/loginRest");
       // final url = await Uri.parse("http://127.0.0.1:8000/api/leave");
       print("-------------------------------------parsed--------------------");
-      var response = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
-          'Accept': 'application/json',
-        },
-      );
+      var response = await http.post(url, headers: {
+        'Authorization': 'Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0',
+        'Accept': 'application/json',
+      }, body: {
+        "email": email,
+        "password": password
+      });
       print(
           "-----------------------------------------response.body-----------------");
       if (response.statusCode == 200) {
@@ -99,7 +97,8 @@ class ApiClient {
           MaterialPageRoute(
             builder: (context) => DashboardScreen(),
           ),
-        );      } else {
+        );
+      } else {
         throw Exception('Failed to load leaves');
       }
     } catch (error) {
@@ -107,9 +106,6 @@ class ApiClient {
       throw Exception('Error fetching leaves: $error');
     }
   }
-
-
-
 
   //
   // static Future<dio.Response> verifyOtp({
@@ -181,5 +177,4 @@ class ApiClient {
   //
   //   }
   // }
-
 }

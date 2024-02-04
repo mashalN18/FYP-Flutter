@@ -131,11 +131,16 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             // const Spacer(),
-            Container(
-              height: 30,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(78, 169, 132, 1.0),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(78, 169, 132, 1.0),
+                  ),
+                ),
+              ],
             ),
             // Align(
             //   alignment: Alignment.bottomLeft,

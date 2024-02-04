@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../Resource/resource.dart';
 import '../Task/task.dart';
 import '../leave/leave.dart';
@@ -63,10 +63,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 //-------Task Container---------------
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  TaskScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TaskScreen()));
                   },
                   child: Container(
                     //------------decor-----------------
@@ -114,10 +112,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 /////-------Leave Container---------------
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LeaveScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LeaveScreen()));
                   },
                   child: Container(
                     //------------decor-----------------
@@ -168,7 +164,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  PerformanceScreen()));
+                            builder: (context) => PerformanceScreen()));
                   },
                   child: Container(
                     //------------decor-----------------
@@ -219,7 +215,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  ResourceScreen()));
+                            builder: (context) => ResourceScreen()));
                   },
                   child: Container(
                     //------------decor-----------------

@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
                 Container(
                   height: 30,
                   decoration: const BoxDecoration(

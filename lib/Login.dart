@@ -110,10 +110,11 @@ class _LoginPageState extends State<LoginPage> {
                       builder: (loginObj) {
                         return ElevatedButton(
                           onPressed: () {
-                            loginObj.login(
-                                context: context,
-                                email: _emailTextController.text.trim(),
-                                password: _emailTextController.text.trim());
+                            Get.to(() => DashboardScreen());
+                            // loginObj.login(
+                            //     context: context,
+                            //     email: _emailTextController.text.trim(),
+                            //     password: _emailTextController.text.trim());
                           },
                           child: loginObj.isLoading
                               ? CircularProgressIndicator()
@@ -134,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
                 Container(
                   height: 30,
                   decoration: const BoxDecoration(

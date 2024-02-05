@@ -7,6 +7,7 @@ class TaskCustomContainer extends StatelessWidget {
   final String EndDate;
   final String Type;
   final String Status;
+  final String image;
 
   const TaskCustomContainer({
     super.key,
@@ -15,7 +16,7 @@ class TaskCustomContainer extends StatelessWidget {
     required this.StartDate,
     required this.EndDate,
     required this.Type,
-    required this.Status,
+    required this.Status, required this.image,
   });
 
   @override
@@ -39,6 +40,7 @@ class TaskCustomContainer extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.cyanAccent,
+                  child: Image.network(image),
                 ),
               ),
               //------------------1-----------------------

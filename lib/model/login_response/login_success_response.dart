@@ -9,105 +9,85 @@ LoginSuccessResponse loginSuccessResponseFromJson(String str) => LoginSuccessRes
 String loginSuccessResponseToJson(LoginSuccessResponse data) => json.encode(data.toJson());
 
 class LoginSuccessResponse {
-  User user;
-  String token;
+  bool success;
+  String message;
+  Data data;
 
   LoginSuccessResponse({
-    required this.user,
-    required this.token,
+    required this.success,
+    required this.message,
+    required this.data,
   });
 
   factory LoginSuccessResponse.fromJson(Map<String, dynamic> json) => LoginSuccessResponse(
-    user: User.fromJson(json["user"]),
+    success: json["success"],
+    message: json["message"],
+    data: Data.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "message": message,
+    "data": data.toJson(),
+  };
+}
+
+class Data {
+  bool isVerified;
+  String id;
+  String firstName;
+  String lastName;
+  String email;
+  String phone;
+  String password;
+  String image;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+  String token;
+
+  Data({
+    required this.isVerified,
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.password,
+    required this.image,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.v,
+    required this.token,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    isVerified: json["isVerified"],
+    id: json["_id"],
+    firstName: json["firstName"],
+    lastName: json["lastName"],
+    email: json["email"],
+    phone: json["phone"],
+    password: json["password"],
+    image: json["image"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
     token: json["token"],
   );
 
   Map<String, dynamic> toJson() => {
-    "user": user.toJson(),
-    "token": token,
-  };
-}
-
-class User {
-  int id;
-  String name;
-  String firstName;
-  String lastName;
-  String employeeCode;
-  String phone;
-  String address;
-  String email;
-  String dob;
-  String gender;
-  DateTime createdAt;
-  dynamic updatedAt;
-  int status;
-  String role;
-  int deptId;
-  String siteUrl;
-  String cnic;
-  String image;
-
-  User({
-    required this.id,
-    required this.name,
-    required this.firstName,
-    required this.lastName,
-    required this.employeeCode,
-    required this.phone,
-    required this.address,
-    required this.email,
-    required this.dob,
-    required this.gender,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.status,
-    required this.role,
-    required this.deptId,
-    required this.siteUrl,
-    required this.cnic,
-    required this.image,
-  });
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    employeeCode: json["employee_code"],
-    phone: json["phone"],
-    address: json["address"],
-    email: json["email"],
-    dob: json["dob"],
-    gender: json["gender"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"],
-    status: json["status"],
-    role: json["role"],
-    deptId: json["dept_id"],
-    siteUrl: json["site_url"],
-    cnic: json["cnic"],
-    image: json["image"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "first_name": firstName,
-    "last_name": lastName,
-    "employee_code": employeeCode,
-    "phone": phone,
-    "address": address,
+    "isVerified": isVerified,
+    "_id": id,
+    "firstName": firstName,
+    "lastName": lastName,
     "email": email,
-    "dob": dob,
-    "gender": gender,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt,
-    "status": status,
-    "role": role,
-    "dept_id": deptId,
-    "site_url": siteUrl,
-    "cnic": cnic,
+    "phone": phone,
+    "password": password,
     "image": image,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
+    "token": token,
   };
 }

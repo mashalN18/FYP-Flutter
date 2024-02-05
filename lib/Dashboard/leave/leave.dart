@@ -42,23 +42,22 @@ class LeaveScreen extends StatelessWidget {
               ),
             ),
           ),
-          Obx(() => Positioned(
-                top: 90,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: ListView.builder(
-                  itemCount: leaveController.leaveList.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        LeaveCustomContainer(leaveModel: leaveController.leaveList[index]),
-                      ],
-                    );
-                  },
-                ),
-              )),
-        ],
+          Positioned(
+            top: 90,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ListView.builder(
+              itemCount: leaveController.leaveList.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    LeaveCustomContainer(leaveModel: leaveController.leaveList[index]),
+                  ],
+                );
+              },
+            ),
+          )        ],
       ),
     );
   }

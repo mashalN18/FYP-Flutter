@@ -7,6 +7,7 @@ class AppConstants {
 
   static const String LOGIN_URL = "/loginRest";
   static const String GET_TASKS = "/task";
+  static const String GET_LEAVES = "/getLeave";
   // static const String LOGIN_URL = "/vendor/login";
   // static const String HOME_GET = "/getAllVendorsByLatLong";
   // static const String VERIFY_OTP = "/verifyOtp/Vendor";

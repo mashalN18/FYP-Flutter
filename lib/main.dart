@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_page/Splash_Screen.dart';
+import 'package:login_page/utils/preferences.dart';
 
 import 'Dashboard.dart';
 import 'Login.dart';
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // TODO: implement initState
-    // Preferences();
+    Preferences();
     super.initState();
   }
 

@@ -4,51 +4,90 @@
 
 import 'dart:convert';
 
-List<TaskSuccessResponse> taskSuccessResponseFromJson(String str) => List<TaskSuccessResponse>.from(json.decode(str).map((x) => TaskSuccessResponse.fromJson(x)));
+TaskSuccessResponse taskSuccessResponseFromJson(String str) => TaskSuccessResponse.fromJson(json.decode(str));
 
-String taskSuccessResponseToJson(List<TaskSuccessResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String taskSuccessResponseToJson(TaskSuccessResponse data) => json.encode(data.toJson());
 
 class TaskSuccessResponse {
+  bool success;
+  List<Datum> data;
+
+  TaskSuccessResponse({
+    required this.success,
+    required this.data,
+  });
+
+  factory TaskSuccessResponse.fromJson(Map<String, dynamic> json) => TaskSuccessResponse(
+    success: json["success"],
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+  };
+}
+
+class Datum {
+  String id;
   String name;
   String description;
   DateTime startDate;
   DateTime endDate;
-  Type? type;
+  String type;
   String taskStatus;
-  int id;
-  String? taskImage;
+  int assignToId;
+  String taskImage;
+  int createdBy;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
 
-  TaskSuccessResponse({
+  Datum({
+    required this.id,
     required this.name,
     required this.description,
     required this.startDate,
     required this.endDate,
     required this.type,
     required this.taskStatus,
-    required this.id,
+    required this.assignToId,
     required this.taskImage,
+    required this.createdBy,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.v,
   });
 
-  factory TaskSuccessResponse.fromJson(Map<String, dynamic> json) => TaskSuccessResponse(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["_id"],
     name: json["name"],
     description: json["description"],
-    startDate: DateTime.parse(json["start_date"]),
-    endDate: DateTime.parse(json["end_date"]),
+    startDate: DateTime.parse(json["startDate"]),
+    endDate: DateTime.parse(json["endDate"]),
     type: json["type"],
-    taskStatus: json["task_status"],
-    id: json["id"],
-    taskImage: json["task_image"],
+    taskStatus: json["taskStatus"],
+    assignToId: json["assignToId"],
+    taskImage: json["taskImage"],
+    createdBy: json["CreatedBy"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
   );
 
   Map<String, dynamic> toJson() => {
+    "_id": id,
     "name": name,
     "description": description,
-    "start_date": "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
-    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
+    "startDate": startDate.toIso8601String(),
+    "endDate": endDate.toIso8601String(),
     "type": type,
-    "task_status": taskStatus,
-    "id": id,
-    "task_image": taskImage,
+    "taskStatus": taskStatus,
+    "assignToId": assignToId,
+    "taskImage": taskImage,
+    "CreatedBy": createdBy,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
   };
 }
-

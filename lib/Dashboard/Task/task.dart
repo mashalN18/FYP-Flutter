@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:login_page/controller/task_screen_controller.dart';
 
 import 'TaskCustomContainer.dart';
 
 class TaskScreen extends StatefulWidget {
-  const TaskScreen({super.key});
+  const TaskScreen
+
+  ({super.key});
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -45,6 +50,7 @@ class _TaskScreenState extends State<TaskScreen> {
     },
   ];
   Color customColor = const Color(0xFF29BD89);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,27 +85,31 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
             ),
           ),
-          Positioned(
-              top: 90,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        TaskCustomContainer(
-                          Task: items[index]["Task"] ?? "",
-                          Description: items[index]["Descrption"] ?? "",
-                          StartDate: items[index]["Start Date"] ?? "",
-                          EndDate: items[index]["End Date"] ?? "",
-                          Type: items[index]["Type"] ?? "",
-                          Status: items[index]["Status"] ?? "",
-                        )
-                      ],
-                    );
-                  })),
+          GetBuilder<TaskScreenController>(
+              init: TaskScreenController(),
+              builder: (taskScreenObj) {
+            return Positioned(
+                top: 90,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: ListView.builder(
+                    itemCount: taskScreenObj.taskList.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          TaskCustomContainer(
+                            Task: "Task $index" ?? "",
+                            Description:  taskScreenObj.taskList[index].description ?? "",
+                            StartDate: DateFormat('dd-MM-yyyy').format(taskScreenObj.taskList[index].startDate) ?? "",
+                            EndDate: DateFormat('dd-MM-yyyy').format(taskScreenObj.taskList[index].endDate) ?? "",
+                            Type: taskScreenObj.taskList[index].type ?? "",
+                            Status: taskScreenObj.taskList[index].taskStatus ?? "", image: taskScreenObj.taskList[index].taskImage,
+                          )
+                        ],
+                      );
+                    }));
+          }),
         ],
       ),
     );

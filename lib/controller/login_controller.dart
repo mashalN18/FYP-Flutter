@@ -6,6 +6,7 @@ import 'package:login_page/Dashboard/MainScreen/dashboard.dart';
 import 'package:login_page/model/login_response/login_error_response.dart';
 import 'package:login_page/model/login_response/login_success_response.dart';
 import 'package:login_page/services/api_client.dart';
+import 'package:login_page/storage/preferences.dart';
 import 'package:login_page/utils/app_constants.dart';
 import 'package:login_page/utils/general_helper.dart';
 import 'package:login_page/utils/logs.dart';
@@ -15,7 +16,7 @@ import 'package:dio/dio.dart' as dio;
 class LoginController extends GetxController {
   bool isLoading = false;
 
-  Future<void> login(
+  Future<bool> login(
       {required BuildContext context,
       required String email,
       required String password}) async {
@@ -35,9 +36,48 @@ class LoginController extends GetxController {
     } else {
       isLoading = true;
       update();
-          await ApiClient.login(email: email, password: password, context: context);
+      dio.Response response =
+      await ApiClient.login(email: email, password: password, context: context);
+      Preferences.saveAuthId(response.data.token);
+
       isLoading = false;
       update();
-  }
+      if (response.statusCode == AppConstants.SUCCESS) {
+        String responseJson = json.encode(response.data);
+        final loginSuccessResponse = loginSuccessResponseFromJson(responseJson);
+        logs("Login response $loginSuccessResponse");
+        GeneralHelper.snackBar(
+            title: "Congratulations", message: "Login Successfully");
+        return true;
+
+
+      } else if (response.statusCode! >= AppConstants.SERVER_SIDE_ERROR) {
+        String responseJson = json.encode(response.data);
+
+        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
+        GeneralHelper.snackBar(
+            title: "Error", message: loginErrorResponse.message, isError: true);
+        return false;
+
+      } else if (response.statusCode! == AppConstants.UNAUTHORIZED) {
+        String responseJson = json.encode(response.data);
+
+        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
+        GeneralHelper.snackBar(
+            title: "Error", message: loginErrorResponse.message, isError: true);
+        return false;
+
+      } else if (response.statusCode! == AppConstants.INTERNAL_SERVER_ERROR) {
+        String responseJson = json.encode(response.data);
+
+        final loginErrorResponse = loginErrorResponseFromJson(responseJson);
+        GeneralHelper.snackBar(
+            title: "Error", message: loginErrorResponse.message, isError: true);
+        return false;
+
+      }  }
+
+    return false;
+
   }
 }

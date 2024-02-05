@@ -28,47 +28,45 @@ class ResourceCustomContainer extends StatelessWidget {
         width: double.maxFinite,
         child: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //------------------R-1------------
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Date: ${Date}"),
-                    Column(
-                      children: [
-                        Text(
-                          "name: ${NameOfResource}",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text("Type : ${TypeOfResource}"),
-                      ],
-                    ),
-                   Text("Status : ${Status}",style: TextStyle(fontSize: 12),),
-                  ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //------------------R-1------------
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Date: ${Date}"),
+                  Column(
+                    children: [
+                      Text(
+                        "name: ${NameOfResource}",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text("Type : ${TypeOfResource}"),
+                    ],
+                  ),
+                 Text("Status : ${Status}",style: TextStyle(fontSize: 12),),
+                ],
 
-                ),
+              ),
 
-                //------------------R-1------------
+              //------------------R-1------------
 
-                //------------------R-2------------
+              //------------------R-2------------
 
-                Column(
-                  children: [
-                    Text(
-                      "Description : ${Description}",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
-                //------------------R-2------------
-              ],
-            ),
+              Column(
+                children: [
+                  Text(
+                    "Description : ${Description}",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
+              //------------------R-2------------
+            ],
           ),
         ));
   }

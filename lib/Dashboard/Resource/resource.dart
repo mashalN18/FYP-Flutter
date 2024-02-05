@@ -70,7 +70,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
                       'Resource',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    Spacer(),
+                    // Spacer(),
                     Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Icon(Icons.search),
@@ -91,44 +91,15 @@ class _ResourceScreenState extends State<ResourceScreen> {
                 child: ListView.builder(
                     itemCount: getResourcesObj.getResourcesList.length,
                     itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          ResourceCustomContainer(
-                              customColor: customColor,
-                              Status: getResourcesObj.getResourcesList[index].approval ?? "",
-                              NameOfResource:
-                              items[index]["Name Of Resource"] ?? "",
-                              TypeOfResource:
-                              items[index]["Type Of Resource"] ?? "",
-                              Date: items[index]["Date"] ?? "",
-                              Description: items[index]["Description"] ?? "")
-                          // CustomContainer(
-                          //   title: 'Name Of Resource',
-                          //   content: items[index]["Name Of Resource"] ?? "",
-                          //   customColor: customColor,
-                          // ),
-                          // CustomContainer(
-                          //   title: 'Type Of Resource',
-                          //   content: items[index]["Type Of Resource"] ?? "",
-                          //   customColor: customColor,
-                          // ),
-                          // CustomContainer(
-                          //   title: 'Date',
-                          //   content: items[index]["Date"] ?? "",
-                          //   customColor: customColor,
-                          // ),
-                          // CustomContainer(
-                          //   title: 'Description',
-                          //   content: items[index]["Description"] ?? "",
-                          //   customColor: customColor,
-                          // ),
-                          // CustomContainer(
-                          //   title: 'Status',
-                          //   content: items[index]["Status"] ?? "",
-                          //   customColor: customColor,
-                          // ),
-                        ],
-                      );
+                      return ResourceCustomContainer(
+                          customColor: customColor,
+                          Status: getResourcesObj.getResourcesList[index].approval ?? "",
+                          NameOfResource:
+                          items[index]["Name Of Resource"] ?? "",
+                          TypeOfResource:
+                          items[index]["Type Of Resource"] ?? "",
+                          Date: items[index]["Date"] ?? "",
+                          Description: items[index]["Description"] ?? "");
                     }));
           }),
         ],

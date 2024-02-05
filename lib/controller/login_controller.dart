@@ -12,6 +12,7 @@ import 'package:login_page/utils/general_helper.dart';
 import 'package:login_page/utils/logs.dart';
 import 'package:login_page/utils/utils.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   bool isLoading = false;
@@ -36,16 +37,19 @@ class LoginController extends GetxController {
     } else {
       isLoading = true;
       update();
+
       dio.Response response = await ApiClient.login(
           email: email, password: password, context: context);
 
       isLoading = false;
       update();
       if (response.statusCode == AppConstants.SUCCESS) {
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
         String responseJson = json.encode(response.data);
         final loginSuccessResponse = loginSuccessResponseFromJson(responseJson);
 
-        // Preferences.saveAuthId(loginSuccessResponse.data.token);
+        sharedPreferences.setString("token", loginSuccessResponse.data.token);
         logs("Login response $loginSuccessResponse");
         Get.to(() => const DashboardScreen());
         GeneralHelper.snackBar(

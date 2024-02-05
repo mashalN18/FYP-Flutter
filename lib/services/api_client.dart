@@ -9,6 +9,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:login_page/services/api_method.dart';
 import 'package:login_page/utils/app_constants.dart';
 import 'package:login_page/utils/logs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../storage/preferences.dart';
 
@@ -145,10 +146,12 @@ class ApiClient {
   // }
   //
   static Future<dio.Response> getTasks() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     var url = AppConstants.BASE_URL + AppConstants.GET_TASKS;
     dio.Response response;
     response = await ApiMethods.getMethod(headers: {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVjMDE1MTY5M2U2ZDEwOTU4MGU5ZTM3IiwiZW1haWwiOiJzcWFhZG1pbkBnbWFpbC5jb20iLCJwaG9uZSI6IisxOTA5MTI3OTM0NiIsImlhdCI6MTcwNzA5NTM2OSwiZXhwIjoxNzA3MTAyNTY5fQ.TG-OF7RopjHBlmIVplWx5FMt6W0hKEuqh7FMEgoOr9Y",
+      "Authorization": "Bearer ${sharedPreferences.getString("token")}",
       "Content-Type": "application/json",
     }, url: url);
     try {
@@ -185,7 +188,7 @@ class ApiClient {
     var url = AppConstants.BASE_URL + AppConstants.GET_LEAVES;
     dio.Response response;
     response = await ApiMethods.getMethod(headers: {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVjMDE1MTY5M2U2ZDEwOTU4MGU5ZTM3IiwiZW1haWwiOiJzcWFhZG1pbkBnbWFpbC5jb20iLCJwaG9uZSI6IisxOTA5MTI3OTM0NiIsImlhdCI6MTcwNzA5NTM2OSwiZXhwIjoxNzA3MTAyNTY5fQ.TG-OF7RopjHBlmIVplWx5FMt6W0hKEuqh7FMEgoOr9Y",
+      "Authorization": "Bearer ${Preferences.getAuthId()}",
       "Content-Type": "application/json",
     }, url: url);
     try {

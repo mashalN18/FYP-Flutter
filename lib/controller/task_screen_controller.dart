@@ -23,7 +23,6 @@ class TaskScreenController extends GetxController{
     update();
     dio.Response response =
     await ApiClient.getTasks();
-
     isLoading = false;
     update();
     if (response.statusCode == HttpStatusCodes.OK) {

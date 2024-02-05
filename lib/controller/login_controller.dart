@@ -45,9 +45,10 @@ class LoginController extends GetxController {
         String responseJson = json.encode(response.data);
         final loginSuccessResponse = loginSuccessResponseFromJson(responseJson);
         logs("Login response $loginSuccessResponse");
+        Preferences.saveAuthId(loginSuccessResponse.data.token);
+
         Get.to(() => DashboardScreen());
 
-        Preferences.saveAuthId(loginSuccessResponse.data.token);
 
         GeneralHelper.snackBar(
             title: "Congratulations", message: "Login Successfully");

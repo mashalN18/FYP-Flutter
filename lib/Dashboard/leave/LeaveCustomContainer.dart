@@ -24,74 +24,67 @@ class LeaveCustomContainer extends StatelessWidget {
         width: double.maxFinite,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //------------------R-1------------
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //ID--------------------------------------------------
-                        Text("${01}"),
-                        Text(
-                        //Leave type--------------------------------------------------
-                          "${leaveModel.type}",
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        // Status--------------------------------
-                        Text("${leaveModel.status}"),
-                      ],
-                    ),
-                    //------------------R-1------------
+              //------------------R-1------------
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //ID--------------------------------------------------
+                  Text("${01}"),
+                  Text(
+                    //Leave type--------------------------------------------------
+                    "${leaveModel.type}",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  // Status--------------------------------
+                  Text("${leaveModel.status}"),
+                ],
+              ),
+              //------------------R-1------------
 
-                    //------------------R-2------------
+              //------------------R-2------------
 
-                    Column(
-                      children: [
-                        Text(
-                          // Reason----------------------------------------
-                          "${leaveModel.reason} ",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
-                    //------------------R-2------------
+              Column(
+                children: [
+                  Text(
+                    // Reason----------------------------------------
+                    "${leaveModel.reason} ",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+              //------------------R-2------------
 
-                    //------------------R-3------------
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // ------------------------DATES-------------------------------
-                        Text(
-                          "${DateFormat('dd-MM-yyyy').format(leaveModel.applyDate)}",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        Text(
-                          "${DateFormat('dd-MM-yyyy').format(leaveModel.startDate)}",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        Text(
-                          "${DateFormat('dd-MM-yyyy').format(leaveModel.endDate)}",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ],
-                    )
-                    //------------------R-3------------
-                  ],
-                ),
+              //------------------R-3------------
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // ------------------------DATES-------------------------------
+                  Text(
+                    "${DateFormat('dd-MM-yyyy').format(leaveModel.applyDate)}",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                  Text(
+                    "${DateFormat('dd-MM-yyyy').format(leaveModel.startDate)}",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                  Text(
+                    "${DateFormat('dd-MM-yyyy').format(leaveModel.endDate)}",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
               )
+              //------------------R-3------------
             ],
-          ),
+          )   ,
         ));
   }
 }

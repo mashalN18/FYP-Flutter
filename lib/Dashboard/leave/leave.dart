@@ -4,8 +4,13 @@ import 'package:login_page/Dashboard/leave/leave_controller.dart';
 import 'package:login_page/controller/leaves_controller.dart';
 import 'LeaveCustomContainer.dart';
 
-class LeaveScreen extends StatelessWidget {
+class LeaveScreen extends StatefulWidget {
 
+  @override
+  State<LeaveScreen> createState() => _LeaveScreenState();
+}
+
+class _LeaveScreenState extends State<LeaveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +58,8 @@ class LeaveScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: leaveObj.leavesList.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      LeaveCustomContainer(leaveModel: leaveObj
-                          .leavesList[index]),
-                    ],
-                  );
+                  return LeaveCustomContainer(leaveModel: leaveObj
+                      .leavesList[index]);
                 },
               ),
             )

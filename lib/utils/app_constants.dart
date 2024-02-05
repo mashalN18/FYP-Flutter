@@ -3,10 +3,10 @@ class AppConstants {
 
   //Base url
 
-  static const String BASE_URL = "http://localhost:8000/api";
+  static const String BASE_URL = "https://garden-app-252mw.ondigitalocean.app";
 
-  static const String LOGIN_URL = "/loginRest";
-  static const String GET_TASKS = "/task";
+  static const String LOGIN_URL = "/user2/login";
+  static const String GET_TASKS = "/getTask";
   static const String GET_LEAVES = "/getLeave";
   // static const String LOGIN_URL = "/vendor/login";
   // static const String HOME_GET = "/getAllVendorsByLatLong";

@@ -130,4 +130,81 @@ class ApiClient {
     }
   }
 
+  static Future<dio.Response> getPerformance() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    var url = AppConstants.BASE_URL + AppConstants.GET_PERFORMANCE;
+    dio.Response response;
+    response = await ApiMethods.getMethod(headers: {
+      "Authorization": "Bearer ${sharedPreferences.getString("token")}",
+      "Content-Type": "application/json",
+    }, url: url);
+    try {
+      String responseJson = json.encode(response.data);
+      logs(response.statusCode.toString());
+      if (response.statusCode! == 200) {
+        return response;
+      }else {
+        return response;
+
+      }
+    } on dio.DioError catch (e) {
+      if (e.message == "Receiving data timeout[50000ms]") {
+        // return ("Please check your connection");
+        return response;
+
+      }
+      if (e.message == "Http status error [401]") {
+        // return ("401");
+        return response;
+
+      } else if (e.message == "Http status error [500]") {
+        return response;
+
+        // return ("500");
+      }
+      // return (e.message!);
+      return response;
+
+    }
+  }
+  static Future<dio.Response> getResources() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    var url = AppConstants.BASE_URL + AppConstants.GET_RESOURCES;
+    dio.Response response;
+    response = await ApiMethods.getMethod(headers: {
+      "Authorization": "Bearer ${sharedPreferences.getString("token")}",
+      "Content-Type": "application/json",
+    }, url: url);
+    try {
+      String responseJson = json.encode(response.data);
+      logs(response.statusCode.toString());
+      if (response.statusCode! == 200) {
+        return response;
+      }else {
+        return response;
+
+      }
+    } on dio.DioError catch (e) {
+      if (e.message == "Receiving data timeout[50000ms]") {
+        // return ("Please check your connection");
+        return response;
+
+      }
+      if (e.message == "Http status error [401]") {
+        // return ("401");
+        return response;
+
+      } else if (e.message == "Http status error [500]") {
+        return response;
+
+        // return ("500");
+      }
+      // return (e.message!);
+      return response;
+
+    }
+  }
+
 }

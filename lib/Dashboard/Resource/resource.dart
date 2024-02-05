@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:login_page/Dashboard/Resource/resourceCustomContainer.dart';
+import 'package:login_page/controller/get_resources_controller.dart';
 
 
 class ResourceScreen extends StatefulWidget {
-  const ResourceScreen({super.key});
+  const ResourceScreen
+
+  ({super.key});
 
   @override
   State<ResourceScreen> createState() => _ResourceScreenState();
@@ -41,6 +45,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
     },
   ];
   Color customColor = const Color(0xFF29BD89);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,53 +80,57 @@ class _ResourceScreenState extends State<ResourceScreen> {
               ),
             ),
           ),
-          Positioned(
-              top: 90,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ResourceCustomContainer(
-                            customColor: customColor,
-                            Status: items[index]["Status"] ?? "",
-                            NameOfResource:
-                                items[index]["Name Of Resource"] ?? "",
-                            TypeOfResource:
-                                items[index]["Type Of Resource"] ?? "",
-                            Date: items[index]["Date"] ?? "",
-                            Description: items[index]["Description"] ?? "")
-                        // CustomContainer(
-                        //   title: 'Name Of Resource',
-                        //   content: items[index]["Name Of Resource"] ?? "",
-                        //   customColor: customColor,
-                        // ),
-                        // CustomContainer(
-                        //   title: 'Type Of Resource',
-                        //   content: items[index]["Type Of Resource"] ?? "",
-                        //   customColor: customColor,
-                        // ),
-                        // CustomContainer(
-                        //   title: 'Date',
-                        //   content: items[index]["Date"] ?? "",
-                        //   customColor: customColor,
-                        // ),
-                        // CustomContainer(
-                        //   title: 'Description',
-                        //   content: items[index]["Description"] ?? "",
-                        //   customColor: customColor,
-                        // ),
-                        // CustomContainer(
-                        //   title: 'Status',
-                        //   content: items[index]["Status"] ?? "",
-                        //   customColor: customColor,
-                        // ),
-                      ],
-                    );
-                  })),
+          GetBuilder<GetResourceController>(
+              init: GetResourceController(),
+              builder: (getResourcesObj) {
+            return Positioned(
+                top: 90,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: ListView.builder(
+                    itemCount: getResourcesObj.getResourcesList.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          ResourceCustomContainer(
+                              customColor: customColor,
+                              Status: getResourcesObj.getResourcesList[index].approval ?? "",
+                              NameOfResource:
+                              items[index]["Name Of Resource"] ?? "",
+                              TypeOfResource:
+                              items[index]["Type Of Resource"] ?? "",
+                              Date: items[index]["Date"] ?? "",
+                              Description: items[index]["Description"] ?? "")
+                          // CustomContainer(
+                          //   title: 'Name Of Resource',
+                          //   content: items[index]["Name Of Resource"] ?? "",
+                          //   customColor: customColor,
+                          // ),
+                          // CustomContainer(
+                          //   title: 'Type Of Resource',
+                          //   content: items[index]["Type Of Resource"] ?? "",
+                          //   customColor: customColor,
+                          // ),
+                          // CustomContainer(
+                          //   title: 'Date',
+                          //   content: items[index]["Date"] ?? "",
+                          //   customColor: customColor,
+                          // ),
+                          // CustomContainer(
+                          //   title: 'Description',
+                          //   content: items[index]["Description"] ?? "",
+                          //   customColor: customColor,
+                          // ),
+                          // CustomContainer(
+                          //   title: 'Status',
+                          //   content: items[index]["Status"] ?? "",
+                          //   customColor: customColor,
+                          // ),
+                        ],
+                      );
+                    }));
+          }),
         ],
       ),
     );

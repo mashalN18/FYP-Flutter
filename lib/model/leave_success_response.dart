@@ -1,61 +1,89 @@
 // To parse this JSON data, do
 //
-//     final leaveSuccessResponse = leaveSuccessResponseFromJson(jsonString);
+//     final getLeavesSuccessResponse = getLeavesSuccessResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-List<LeaveSuccessResponse> leaveSuccessResponseFromJson(String str) => List<LeaveSuccessResponse>.from(json.decode(str).map((x) => LeaveSuccessResponse.fromJson(x)));
+GetLeavesSuccessResponse getLeavesSuccessResponseFromJson(String str) => GetLeavesSuccessResponse.fromJson(json.decode(str));
 
-String leaveSuccessResponseToJson(List<LeaveSuccessResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String getLeavesSuccessResponseToJson(GetLeavesSuccessResponse data) => json.encode(data.toJson());
 
-class LeaveSuccessResponse {
-  String? title;
-  int id;
-  String reason;
-  DateTime applyDate;
-  DateTime startDate;
-  DateTime endDate;
-  String type;
-  String description;
-  String status;
-  String name;
+class GetLeavesSuccessResponse {
+  bool success;
+  List<Datum> data;
 
-  LeaveSuccessResponse({
-    required this.title,
-    required this.id,
-    required this.reason,
-    required this.applyDate,
-    required this.startDate,
-    required this.endDate,
-    required this.type,
-    required this.description,
-    required this.status,
-    required this.name,
+  GetLeavesSuccessResponse({
+    required this.success,
+    required this.data,
   });
 
-  factory LeaveSuccessResponse.fromJson(Map<String, dynamic> json) => LeaveSuccessResponse(
-    title: json["title"],
-    id: json["id"],
-    reason: json["reason"],
-    applyDate: DateTime.parse(json["apply_date"]),
-    startDate: DateTime.parse(json["start_date"]),
-    endDate: DateTime.parse(json["end_date"]),
-    type: json["type"],
-    description: json["description"],
-    status: json["status"],
-    name: json["name"],
+  factory GetLeavesSuccessResponse.fromJson(Map<String, dynamic> json) => GetLeavesSuccessResponse(
+    success: json["success"],
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "id": id,
+    "success": success,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+  };
+}
+
+class Datum {
+  String id;
+  String userId;
+  DateTime applyDate;
+  String reason;
+  String status;
+  String type;
+  String description;
+  DateTime startDate;
+  DateTime endDate;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  Datum({
+    required this.id,
+    required this.userId,
+    required this.applyDate,
+    required this.reason,
+    required this.status,
+    required this.type,
+    required this.description,
+    required this.startDate,
+    required this.endDate,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.v,
+  });
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["_id"],
+    userId: json["userId"],
+    applyDate: DateTime.parse(json["applyDate"]),
+    reason: json["reason"],
+    status: json["status"],
+    type: json["type"],
+    description: json["description"],
+    startDate: DateTime.parse(json["startDate"]),
+    endDate: DateTime.parse(json["endDate"]),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "userId": userId,
+    "applyDate": applyDate.toIso8601String(),
     "reason": reason,
-    "apply_date": "${applyDate.year.toString().padLeft(4, '0')}-${applyDate.month.toString().padLeft(2, '0')}-${applyDate.day.toString().padLeft(2, '0')}",
-    "start_date": "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
-    "end_date": "${endDate.year.toString().padLeft(4, '0')}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}",
+    "status": status,
     "type": type,
     "description": description,
-    "status": status,
-    "name": name,
+    "startDate": startDate.toIso8601String(),
+    "endDate": endDate.toIso8601String(),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "__v": v,
   };
 }

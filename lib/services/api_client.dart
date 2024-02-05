@@ -185,7 +185,7 @@ class ApiClient {
     var url = AppConstants.BASE_URL + AppConstants.GET_LEAVES;
     dio.Response response;
     response = await ApiMethods.getMethod(headers: {
-      // "Authorization": "Bearer ${Preferences.getAuthId()}",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVjMDE1MTY5M2U2ZDEwOTU4MGU5ZTM3IiwiZW1haWwiOiJzcWFhZG1pbkBnbWFpbC5jb20iLCJwaG9uZSI6IisxOTA5MTI3OTM0NiIsImlhdCI6MTcwNzA5NTM2OSwiZXhwIjoxNzA3MTAyNTY5fQ.TG-OF7RopjHBlmIVplWx5FMt6W0hKEuqh7FMEgoOr9Y",
       "Content-Type": "application/json",
     }, url: url);
     try {

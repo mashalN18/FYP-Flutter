@@ -13,9 +13,9 @@ class LeaveController extends GetxController {
   bool isLoading = false;
   int currentPage = 1;
   int totalPage = 0;
-  List<LeaveSuccessResponse> leavesList = [];
+  List<Datum> leavesList = [];
 
-// Future<bool> getTasks() async {
+// Future<bool> getLeave() async {
 //   isLoading = true;
 //   update();
 //   dio.Response response =

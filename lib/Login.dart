@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login_page/controller/login_controller.dart';
 import 'package:login_page/services/api_client.dart';
+import 'package:login_page/utils/logs.dart';
 import 'Dashboard.dart';
 import 'Dashboard/MainScreen/dashboard.dart';
 
@@ -113,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                             loginObj.login(
                                 context: context,
                                 email: _emailTextController.text.trim(),
-                                password: _emailTextController.text.trim());
+                                password: _passwordTextController.text.trim());
                           },
                           child: loginObj.isLoading
                               ? CircularProgressIndicator()

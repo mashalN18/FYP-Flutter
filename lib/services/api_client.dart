@@ -83,11 +83,13 @@ class ApiClient {
     response = await ApiMethods.postRequest(
         {
           // "Authorization": "Bearer 1|68CBxqGnar60LnDD8kOwTDxOyROZawPDouHQkZy0",
-          "Content-Type": "application/json"},
+          "Content-Type": "application/json"
+
+        },
         data: {"email": email, "password": password}, url: url);
 
     try {
-      logs(response.statusMessage.toString());
+      logs("this is ${response.statusMessage.toString()}");
       if (response.statusCode! == 200) {
         return response;
       } else {

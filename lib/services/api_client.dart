@@ -15,65 +15,6 @@ import '../storage/preferences.dart';
 
 
 class ApiClient {
-  //
-  // static Future<dio.Response> registration(
-  //     {
-  //     required String fullName,
-  //     required String companyName,
-  //     required String email,
-  //     required String phone,
-  //     required String password,
-  //     required String confirmPassword,
-  //     required String referralCode,
-  //     required List<double> latLong,
-  //     required String imageFile}) async {
-  //   var url = AppConstants.BASE_URL + AppConstants.REGISTRATION_URL;
-  //   dio.Response response;
-  //   response = await ApiMethods.postRequest({
-  //     "Accept": "*/*",
-  //     "Content-Type": "application/json"
-  //   }, data: {
-  //     "fullName": fullName,
-  //     "companyName": companyName,
-  //     "email": email,
-  //     "phone": phone,
-  //     "address": "Karachi",
-  //     "latLong": [ 16.3, 11.4 ],
-  //     "image": imageFile,
-  //     "password": password,
-  //     "confirmPassword": confirmPassword,
-  //     "referralCode": referralCode
-  //
-  //   }, url: url);
-  //   try {
-  //     String responseJson = json.encode(response.data);
-  //     logs(response.statusCode.toString());
-  //     if (response.statusCode! == 200) {
-  //       return response;
-  //     }else {
-  //       return response;
-  //
-  //     }
-  //   } on dio.DioError catch (e) {
-  //     if (e.message == "Receiving data timeout[50000ms]") {
-  //       // return ("Please check your connection");
-  //       return response;
-  //
-  //     }
-  //     if (e.message == "Http status error [401]") {
-  //       // return ("401");
-  //       return response;
-  //
-  //     } else if (e.message == "Http status error [500]") {
-  //       return response;
-  //
-  //       // return ("500");
-  //     }
-  //     // return (e.message!);
-  //     return response;
-  //
-  //   }
-  // }
 
   static Future<dio.Response> login({
     required String email,
@@ -111,40 +52,6 @@ class ApiClient {
 
 
 
-  //
-  // static Future<dio.Response> verifyOtp({
-  //   required String phoneNumber,
-  //   required String otpCode,
-  // }) async {
-  //   var url = AppConstants.BASE_URL + AppConstants.VERIFY_OTP;
-  //   dio.Response response;
-  //   response = await ApiMethods.postRequest(
-  //       {
-  //         "Authorization": "Bearer ${Preferences.getAuthId()}",
-  //         "Content-Type": "application/json",
-  //       },
-  //       data: {"otp": otpCode}, url: url);
-  //
-  //   try {
-  //     logs(response.statusMessage.toString());
-  //     if (response.statusCode! == 200) {
-  //       return response;
-  //     } else {
-  //       return response;
-  //     }
-  //   } on dio.DioError catch (e) {
-  //     if (e.message == "Receiving data timeout[50000ms]") {
-  //       return response;
-  //     }
-  //     if (e.message == "Http status error [401]") {
-  //       return response;
-  //     } else if (e.message == "Http status error [500]") {
-  //       return response;
-  //     }
-  //     return response;
-  //   }
-  // }
-  //
   static Future<dio.Response> getTasks() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -185,10 +92,12 @@ class ApiClient {
   }
 
   static Future<dio.Response> getLeaves() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     var url = AppConstants.BASE_URL + AppConstants.GET_LEAVES;
     dio.Response response;
     response = await ApiMethods.getMethod(headers: {
-      "Authorization": "Bearer ${Preferences.getAuthId()}",
+      "Authorization": "Bearer ${sharedPreferences.getString("token")}",
       "Content-Type": "application/json",
     }, url: url);
     try {

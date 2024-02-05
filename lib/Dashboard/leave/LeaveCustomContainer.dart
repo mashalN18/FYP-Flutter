@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:login_page/Dashboard/leave/leave_controller.dart';
+import 'package:login_page/model/leave_success_response.dart';
 import 'package:login_page/models/leave_model.dart';
 
 class LeaveCustomContainer extends StatelessWidget {
-  final LeaveModel leaveModel; // Added this line
+  final Datum leaveModel; // Added this line
 
   // final LeaveController leaveController = Get.find();
   LeaveCustomContainer({
@@ -68,17 +70,17 @@ class LeaveCustomContainer extends StatelessWidget {
                       children: [
                         // ------------------------DATES-------------------------------
                         Text(
-                          "${leaveModel.applyDate}",
+                          "${DateFormat('dd-MM-yyyy').format(leaveModel.applyDate)}",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
                         Text(
-                          "${leaveModel.startDate}",
+                          "${DateFormat('dd-MM-yyyy').format(leaveModel.startDate)}",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
                         Text(
-                          "${leaveModel.endDate}",
+                          "${DateFormat('dd-MM-yyyy').format(leaveModel.endDate)}",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),

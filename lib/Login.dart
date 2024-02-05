@@ -110,11 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                       builder: (loginObj) {
                         return ElevatedButton(
                           onPressed: () {
-                            Get.to(() => DashboardScreen());
-                            // loginObj.login(
-                            //     context: context,
-                            //     email: _emailTextController.text.trim(),
-                            //     password: _emailTextController.text.trim());
+                            loginObj.login(
+                                context: context,
+                                email: _emailTextController.text.trim(),
+                                password: _emailTextController.text.trim());
                           },
                           child: loginObj.isLoading
                               ? CircularProgressIndicator()

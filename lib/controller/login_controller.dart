@@ -38,7 +38,6 @@ class LoginController extends GetxController {
       update();
       dio.Response response =
       await ApiClient.login(email: email, password: password, context: context);
-      Preferences.saveAuthId(response.data.token);
 
       isLoading = false;
       update();
@@ -46,6 +45,10 @@ class LoginController extends GetxController {
         String responseJson = json.encode(response.data);
         final loginSuccessResponse = loginSuccessResponseFromJson(responseJson);
         logs("Login response $loginSuccessResponse");
+        Get.to(() => DashboardScreen());
+
+        Preferences.saveAuthId(loginSuccessResponse.data.token);
+
         GeneralHelper.snackBar(
             title: "Congratulations", message: "Login Successfully");
         return true;
